@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="ZSV_COMPENSACIONES_SRV" xml:lang="es" sap:schema-version="1" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <EntityType Name="Cliente" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Kunnr"/>
+                </Key>
+                <Property Name="Kunnr" Type="Edm.String" Nullable="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Name1" Type="Edm.String" Nullable="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="Pdf" m:HasStream="true" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Documento"/>
+                </Key>
+                <Property Name="Documento" Type="Edm.String" Nullable="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="File" Type="Edm.Binary" Nullable="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Mimetype" Type="Edm.String" Nullable="false" MaxLength="100" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="Compensaciones" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="IDComp"/>
+                    <PropertyRef Name="Documento"/>
+                    <PropertyRef Name="Fecha"/>
+                </Key>
+                <Property Name="IDComp" Type="Edm.String" Nullable="false" sap:label="Numero de Compensacion" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Pdf" Type="Edm.Boolean" Nullable="false" sap:label="Indicador" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Descripcion" Type="Edm.String" Nullable="false" sap:label="Descripcion" sap:creatable="false"/>
+                <Property Name="Importe" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="2" sap:label="Importe USD" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="Kunnr" Type="Edm.String" Nullable="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="FechaDesde" Type="Edm.DateTime" Nullable="false" Precision="0" sap:label="FechaDesde" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="FechaHasta" Type="Edm.DateTime" Precision="0" sap:label="FechaHasta" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="Documento" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Documento" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="Fecha" Type="Edm.DateTime" Nullable="false" Precision="7" sap:label="Fecha" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+                <Property Name="Tipocambio" Type="Edm.Decimal" Nullable="false" Precision="9" Scale="5" sap:label="Tipo Cambio" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="ImporteARS" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="2" sap:label="Importe ARS" sap:creatable="false" sap:updatable="false"/>
+            </EntityType>
+            <EntityContainer Name="ZSV_COMPENSACIONES_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json">
+                <EntitySet Name="ClienteSet" EntityType="ZSV_COMPENSACIONES_SRV.Cliente" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="PdfSet" EntityType="ZSV_COMPENSACIONES_SRV.Pdf" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="CompensacionesSet" EntityType="ZSV_COMPENSACIONES_SRV.Compensaciones" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+            </EntityContainer>
+            <atom:link rel="self" href="http://proferdev:8001/sap/opu/odata/sap/ZSV_COMPENSACIONES_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+            <atom:link rel="latest-version" href="http://proferdev:8001/sap/opu/odata/sap/ZSV_COMPENSACIONES_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

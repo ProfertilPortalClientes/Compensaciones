@@ -1,0 +1,108 @@
+<mvc:View
+    controllerName="profertil.compensacionesv2.controller.MainView"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    displayBlock="true"  
+    xmlns="sap.m"
+    xmlns:semantic="sap.f.semantic"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar" 
+    xmlns:fb="sap.ui.comp.filterbar" 
+    xmlns:table="sap.ui.table"
+    xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+  <Shell id="_IDGenShell1">
+    <App id="app">
+      <semantic:SemanticPage id="_IDGenSemanticPage1" 
+    headerPinnable="true" 
+    toggleHeaderOnTitleClick="true"
+    showFooter="false"
+    preserveHeaderStateOnScroll="false"
+    titleAreaShrinkRatio="1:1.6:1.6">
+		<!-- Title Heading-->
+		<semantic:titleHeading>
+			<Title id="headerTitle" text="Visualizar Compensaciones" textAlign="Center" class="sapUiResponsiveMargin"/>
+		</semantic:titleHeading>
+		<semantic:titleExpandedContent>
+	    <VBox id="expContent" class="sapUiResponsiveContentPadding">
+                <ObjectHeader binding="{/ClienteSet('1')}" id="_IDGenObjectHeader1" icon="sap-icon://customer" iconDensityAware="false" iconAlt="{Name1}" imageShape="Circle" responsive="true" fullScreenOptimized="true" title="{Name1}" class="sapUiResponsivePadding--header">
+                </ObjectHeader>
+        </VBox> 
+		</semantic:titleExpandedContent>
+		<semantic:headerContent>
+        <smartFilterBar:SmartFilterBar 
+        id="filterbar" 
+        persistencyKey="UniqueAndStablePersistencyKey" 
+        considerSelectionVariants="true" 
+        entitySet="CompensacionesSet"
+        showFilterConfiguration="true" 
+        showRestoreButton="false"
+        class="sapUiResponsiveMargin"
+        useDateRangeType="true">  
+
+        <smartFilterBar:controlConfiguration>
+          <smartFilterBar:ControlConfiguration id="FechaDesdecc" hasValueHelpDialog="false" key="FechaDesde" 
+            label="Fecha Desde" groupId="_BASIC" width="300px"  visible="true" visibleInAdvancedArea="false" 
+            mandatory="mandatory" filterType="single"> 
+                <smartFilterBar:customControl>
+                      <DatePicker	id="FechaDesdeID"  change="onChangeDesde" displayFormat="d/M/yyyy" />
+               </smartFilterBar:customControl> 
+          </smartFilterBar:ControlConfiguration>
+
+          <smartFilterBar:ControlConfiguration id="FechaHastacc" hasValueHelpDialog="false" key="FechaHasta" 
+            label="Fecha Hasta" groupId="_BASIC" width="300px"  visible="true" visibleInAdvancedArea="false" 
+            mandatory="mandatory" filterType="single"> 
+             <smartFilterBar:customControl>
+                    <DatePicker	id="FechaHastaID" change="onChangeHasta" displayFormat="d/M/yyyy" />
+            </smartFilterBar:customControl> 
+          </smartFilterBar:ControlConfiguration>
+      </smartFilterBar:controlConfiguration>
+     </smartFilterBar:SmartFilterBar>
+	</semantic:headerContent> 
+
+	<semantic:content>
+        <VBox id="contentContainer"  fitContainer="true" alignContent="Center" alignItems="Center" class="sapUiNoContentPadding" >
+            <sap.ui.comp.smarttable:SmartTable 
+                xmlns:sap.ui.comp.smarttable="sap.ui.comp.smarttable"
+                entitySet="CompensacionesSet" 
+                tableType="ResponsiveTable"
+                id="ListaSetID"
+                enableAutoBinding="true" 
+                ignoredFields="Detalle,Blart"
+                initiallyVisibleFields="Pdf,Fecha,Documento,Descripcion,Importe,Tipocambio,ImporteARS"
+                smartFilterId="filterbar"
+                requestAtLeastFields="Kunnr,IDComp"
+                beforeRebindTable="onBeforeRebindTable"
+                showRowCount="true"
+                class="sapUiResponsiveContentPadding">
+                <Table id="_IDGenTable1" growing="true" sticky="ColumnHeaders">
+                <columns>
+                    <Column  id="Pdf" hAlign="Center" >
+                        <customData>
+                            <core:CustomData key="p13nData"  value='\{"columnKey": "Pdf", "autoColumnWidth": true, "isCurrency": false, "columnIndex": "0"}'/>
+                        </customData>
+                            <Label id="header-bzrik-label" text="Compensacion Documento"/>
+                    </Column>
+                    <Column  id="Fecha" hAlign="Center" >
+                        <customData>
+                            <core:CustomData key="p13nData"  value='\{"columnKey": "Fecha", "leadingProperty": "Fecha", "sortProperty": "Fecha", "columnIndex": "1",  "type":"date", "UTC": true }'/>
+                        </customData>
+                            <Label id="labelFecha" text="Fecha" wrapping="true"/>
+                    </Column>                    
+                </columns>
+               
+                  <items>
+                   <ColumnListItem id="_IDGenColumnListItem1" >
+                        <cells>
+                          <ObjectStatus id="_IDGenObjectStatus1" icon="sap-icon://pdf-attachment" active="true" press="onPdfDocumento"/>                       
+                          <Text id="_IDObjectIdentFecha" text="{ path: 'Fecha', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd.MM.yyyy', strictParsing: true, UTC: true } }"/>
+                        </cells>                       
+                    </ColumnListItem>
+
+                   </items>
+                   </Table>
+            </sap.ui.comp.smarttable:SmartTable>  
+        </VBox>
+	</semantic:content>
+</semantic:SemanticPage>
+ </App>
+</Shell>
+ </mvc:View>
